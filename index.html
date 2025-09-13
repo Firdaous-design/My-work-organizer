@@ -71,6 +71,15 @@
 <body class="bg-gray-100">
 
     <div class="container py-8">
+        <!-- Message de confirmation pour le débogage -->
+        <div id="debug-message" class="bg-green-100 text-green-700 p-4 rounded-xl mb-6 text-center font-bold">
+            Version interactive chargée avec succès ! Testez le bouton ci-dessous.
+        </div>
+        <div class="text-center mb-6">
+            <button id="interactivity-test-btn" class="btn btn-primary">Tester l'interactivité</button>
+            <p id="interactivity-message" class="mt-2 text-sm text-gray-600">Le bouton a été cliqué 0 fois.</p>
+        </div>
+
         <header class="text-center mb-8">
             <h1 class="text-4xl font-extrabold text-indigo-800">AI Business Manager</h1>
             <p class="text-lg text-gray-600 mt-2">Votre assistant intelligent pour la gestion client et de projet.</p>
@@ -266,6 +275,11 @@
         const closeModalBtn = document.getElementById('close-modal-btn');
         const tabButtons = document.querySelectorAll('.tab-button');
         const tabContents = document.querySelectorAll('.tab-content');
+        
+        // Interactivity test elements
+        const interactivityTestBtn = document.getElementById('interactivity-test-btn');
+        const interactivityMessage = document.getElementById('interactivity-message');
+        let clickCount = 0;
 
         // Initialize Firebase
         const app = initializeApp(firebaseConfig);
@@ -274,7 +288,7 @@
         setLogLevel('debug');
 
         // API Key for Gemini API (left empty, will be provided at runtime)
-        const apiKey = "AIzaSyAe_eysrsB4TrRuVUT4s34rNe2e0weGyuI";
+        const apiKey = "";
 
         // Authentication State Listener
         onAuthStateChanged(auth, async (user) => {
@@ -297,6 +311,12 @@
             }
             console.log("Authenticated with user ID:", userId);
             fetchClientsForSelect();
+        });
+
+        // Simple interactivity test
+        interactivityTestBtn.addEventListener('click', () => {
+            clickCount++;
+            interactivityMessage.textContent = `Le bouton a été cliqué ${clickCount} fois.`;
         });
 
         function showLoading(message = 'Chargement en cours...') {
