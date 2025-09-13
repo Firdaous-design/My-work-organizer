@@ -1,49 +1,21 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>AI Business Manager</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
-  <style>
-    body { font-family: 'Inter', sans-serif; }
-    .tab-content { display: none; }
-    .tab-content.active { display: block; }
-    .tab-button.active { background-color: #e0e7ff; color: #4338ca; font-weight: bold; }
-    .modal.hidden { display: none; }
-  </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Work Organizer</title>
+  <link rel="stylesheet" href="./style.css">
 </head>
-<body class="bg-gray-100">
+<body>
 
-  <div class="container mx-auto max-w-5xl p-8">
-    <div id="debug-message" class="bg-green-100 text-green-700 p-4 rounded-xl mb-6 text-center font-bold">
-      Version interactive chargée avec succès !
-    </div>
+  <h1>My Work Organizer</h1>
 
-    <div class="text-center mb-6">
-      <button id="interactivity-test-btn" class="px-6 py-3 bg-indigo-600 text-white rounded-full hover:bg-indigo-700 transition">Tester l'interactivité</button>
-      <p id="interactivity-message" class="mt-2 text-sm text-gray-600">Le bouton a été cliqué 0 fois.</p>
-    </div>
+  <button id="addTaskBtn">Ajouter une tâche</button>
+  <button id="deleteAllBtn">Supprimer toutes les tâches</button>
 
-    <header class="text-center mb-8">
-      <h1 class="text-4xl font-extrabold text-indigo-800">AI Business Manager</h1>
-      <p class="text-lg text-gray-600 mt-2">Votre assistant intelligent pour la gestion client et de projet.</p>
-    </header>
+  <div id="tasksContainer"></div>
 
-    <div class="bg-white rounded-2xl shadow-xl p-6">
-      <!-- Onglets -->
-      <div class="flex border-b border-gray-200 mb-6 flex-wrap gap-1">
-        <button class="tab-button px-4 py-2 rounded-t-lg" data-tab="find-slot">Trouver un créneau</button>
-        <button class="tab-button px-4 py-2 rounded-t-lg" data-tab="schedule-meeting">Planifier</button>
-        <button class="tab-button px-4 py-2 rounded-t-lg" data-tab="manage-notes">Notes</button>
-      </div>
-
-      <!-- Contenu de l'onglet 1 -->
-      <div id="find-slot" class="tab-content active">
-        <h2 class="text-2xl font-bold mb-4">Trouver un créneau disponible</h2>
-        <input id="client-name" type="text" placeholder="Nom du client" class="border p-2 rounded w-full mb-2" />
-        <input id="meeting-duration" type="number" value="60" class="border p-2 rounded w-full mb-2" />
-        <input id="preferred-days" type="text" placeholder="Lundi, Mercredi" class="border p-2 rounded w-full mb-2" />
-        <textarea id="busy-slots" rows="3" placeholder='[{"day":"Lundi","start":"09:00","end":"10:30"}]' class="
+  <!-- Ton script JS doit être chargé à la fin du body -->
+  <script src="./script.js"></script>
+</body>
+</html>
