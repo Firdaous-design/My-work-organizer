@@ -3,19 +3,111 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>My Work Organizer</title>
-  <link rel="stylesheet" href="./style.css">
+  <title>AI Business Manager</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #f3f4f6;
+      color: #1f2937;
+    }
+    .container {
+      max-width: 1200px;
+      margin: auto;
+      padding: 2rem;
+    }
+    .card {
+      background-color: #fff;
+      border-radius: 1.5rem;
+      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
+                  0 4px 6px -2px rgba(0, 0, 0, 0.05);
+      padding: 2rem;
+    }
+    .tab-content { display: none; }
+    .tab-content.active { display: block; }
+    .tab-button.active {
+      background-color: #e0e7ff;
+      color: #4338ca;
+      font-weight: bold;
+    }
+    #notesOutput p, #notesOutput ul {
+      margin-bottom: 1rem;
+    }
+    #notesOutput ul {
+      list-style-type: disc;
+      padding-left: 20px;
+    }
+  </style>
 </head>
-<body>
+<body class="bg-gray-100">
 
-  <h1>My Work Organizer</h1>
+  <div class="container py-8">
+    <header class="text-center mb-8">
+      <h1 class="text-4xl font-extrabold text-indigo-800">AI Business Manager</h1>
+      <p class="text-lg text-gray-600 mt-2">Votre assistant intelligent pour la gestion client et de projet.</p>
+    </header>
 
-  <button id="addTaskBtn">Ajouter une tâche</button>
-  <button id="deleteAllBtn">Supprimer toutes les tâches</button>
+    <div class="card mb-8">
+      <div class="flex border-b border-gray-200 mb-6 flex-wrap">
+        <button class="tab-button px-4 py-2 -mb-px rounded-t-lg transition-colors duration-200" data-tab="find-slot">Trouver un créneau</button>
+        <button class="tab-button px-4 py-2 -mb-px rounded-t-lg transition-colors duration-200" data-tab="schedule-meeting">Planifier la réunion</button>
+        <button class="tab-button px-4 py-2 -mb-px rounded-t-lg transition-colors duration-200" data-tab="manage-notes">Gérer les notes</button>
+        <button class="tab-button px-4 py-2 -mb-px rounded-t-lg transition-colors duration-200" data-tab="create-contract">Créer un contrat</button>
+        <button class="tab-button px-4 py-2 -mb-px rounded-t-lg transition-colors duration-200" data-tab="client-folder">Dossier client</button>
+        <button class="tab-button px-4 py-2 -mb-px rounded-t-lg transition-colors duration-200" data-tab="calendar-manager">Gestionnaire de calendrier</button>
+        <button class="tab-button px-4 py-2 -mb-px rounded-t-lg transition-colors duration-200" data-tab="project-generator">Générer une idée de projet</button>
+      </div>
 
-  <div id="tasksContainer"></div>
+      <!-- Onglet Trouver un créneau -->
+      <div id="find-slot" class="tab-content active">
+        <h2 class="text-2xl font-bold mb-4">Trouver un créneau disponible</h2>
+        <div class="mb-4">
+          <label class="block mb-1">Nom du client</label>
+          <input type="text" id="client-name" class="w-full border border-gray-300 rounded-lg p-3">
+        </div>
+        <div class="mb-4">
+          <label class="block mb-1">Durée de la réunion (en minutes)</label>
+          <input type="number" id="meeting-duration" value="60" class="w-full border border-gray-300 rounded-lg p-3">
+        </div>
+        <div class="mb-4">
+          <label class="block mb-1">Jours préférés</label>
+          <input type="text" id="preferred-days" class="w-full border border-gray-300 rounded-lg p-3">
+        </div>
+        <div class="mb-4">
+          <label class="block mb-1">Créneaux déjà pris (JSON)</label>
+          <textarea id="busy-slots" class="w-full border border-gray-300 rounded-lg p-3" rows="4"></textarea>
+        </div>
+        <button id="find-slot-btn" class="px-6 py-3 font-semibold rounded-full bg-indigo-600 text-white hover:bg-indigo-700">Rechercher</button>
+        <div id="slots-output" class="mt-4 p-4 bg-gray-50 rounded-lg border border-gray-200 hidden">
+          <h3 class="font-semibold text-lg">Créneaux trouvés :</h3>
+          <ul id="available-slots-list" class="list-disc pl-5 mt-2 text-gray-700"></ul>
+        </div>
+      </div>
 
-  <!-- Ton script JS doit être chargé à la fin du body -->
-  <script src="./script.js"></script>
+      <!-- Tu peux laisser les autres onglets comme dans ton code original (schedule-meeting, manage-notes, etc.) -->
+
+    </div>
+  </div>
+
+  <script>
+    const tabButtons = document.querySelectorAll('.tab-button');
+    const tabContents = document.querySelectorAll('.tab-content');
+
+    tabButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        tabButtons.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        tabContents.forEach(tab => tab.classList.remove('active'));
+        document.getElementById(btn.dataset.tab).classList.add('active');
+      });
+    });
+
+    document.querySelector('.tab-button').click();
+  </script>
 </body>
 </html>
